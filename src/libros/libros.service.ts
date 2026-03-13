@@ -12,14 +12,17 @@ export class LibrosService {
   create(createLibroDto: CreateLibroDto) {
     const maxId =
       this.libros.length > 0 ? Math.max(...this.libros.map((l) => l.id)) : 0;
-
-    // Calculamos el nuevo ID
     const newId = maxId + 1;
 
+    // Mapeo explícito para que TypeScript en Render no llore
     const nuevoLibro: Libro = {
       id: newId,
-      ...createLibroDto,
+      titulo: createLibroDto.titulo,
+      autor: createLibroDto.autor,
+      editorial: createLibroDto.editorial,
+      anio_publicacion: createLibroDto.anio_publicacion,
     };
+
     this.libros.push(nuevoLibro);
     return nuevoLibro;
   }
